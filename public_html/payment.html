@@ -1,0 +1,381 @@
+<!--
+author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>Become a member</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+	
+	<!-- JS files -->
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="https://lylelondraville.github.io/DB/public_js/check-membership-form.js"></script>
+	<!-- //JS files -->
+	
+
+	<!-- css files -->
+
+
+    <link href="https://lylelondraville.github.io/public_html/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="https://lylelondraville.github.io/public_html/css/style.css" rel='stylesheet' type='text/css' />
+    <script src="https://kit.fontawesome.com/cbd33952c6.js"></script>
+    <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
+	<!-- //css files -->
+	
+	
+</head>
+<body>
+<header>
+		<div class="container">
+			<nav class="py-md-4 py-3 d-lg-flex">
+				<div id="logo">
+					<h1 class="mt-md-0 mt-2"> <a href="https://monti-test-site-test.us"><span class="fas fa-mountain"></span> Mountaineers</a></h1>
+				</div>
+				<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
+				<input type="checkbox" id="drop" />
+				<ul class="menu ml-auto mt-1">
+					<li><a href="https://monti-test-site-test.us">Home</a></li>
+					<li><a href="https://monti-test-site-test.us/membership">Membership</a></li>
+					<li><a href="https://monti-test-site-test.us/about">About & Contact</a></li>
+					
+				</ul>
+			</nav>
+		</div>
+</header>
+
+<section class="banner_inner" id="home">
+	<div class="banner_inner_overlay">
+	</div>
+</section>
+
+<section class="contact py-5">
+	<div class="container py-lg-5 py-sm-4">
+		<h2 class="heading text-capitalize text-center mb-lg-5 mb-4">Become a member</h2>
+		<div class="contact-grids">
+			<div class="row">
+				<div class="col-lg-7 contact-left-form">
+					<form id="payment-form" name="payment-form" class="row" >
+
+						<div class="col-sm-6 form-group contact-forms">
+						  <input name="firstname" id="first-name" type="text" class="form-control" placeholder="First Name">
+						</div>
+
+						<div name="lastname" class="col-sm-6 form-group contact-forms">
+						  <input name="lastname" id="last-name" type="text" class="form-control" placeholder="Last Name">
+						</div>
+
+						<div class="col-sm-6 form-group contact-forms">
+						  <input name="dotnumber" id="dot-number" type="number" class="form-control" placeholder="OSU dot number"> 
+						</div>
+
+						<div class="col-sm-6 form-group contact-forms">
+							<input name="email" id="email" type="text" class="form-control" placeholder="non-osu email"> 
+						</div>
+
+						<div class="col-md-12 form-group contact-forms">
+							<select class="form-control" id="select_country">
+								<option value="AF">Afghanistan</option>
+								<option value="AX">Aland Islands</option>
+								<option value="AL">Albania</option>
+								<option value="DZ">Algeria</option>
+								<option value="AS">American Samoa</option>
+								<option value="AD">Andorra</option>
+								<option value="AO">Angola</option>
+								<option value="AI">Anguilla</option>
+								<option value="AQ">Antarctica</option>
+								<option value="AG">Antigua And Barbuda</option>
+								<option value="AR">Argentina</option>
+								<option value="AM">Armenia</option>
+								<option value="AW">Aruba</option>
+								<option value="AU">Australia</option>
+								<option value="AT">Austria</option>
+								<option value="AZ">Azerbaijan</option>
+								<option value="BS">Bahamas The</option>
+								<option value="BH">Bahrain</option>
+								<option value="BD">Bangladesh</option>
+								<option value="BB">Barbados</option>
+								<option value="BY">Belarus</option>
+								<option value="BE">Belgium</option>
+								<option value="BZ">Belize</option>
+								<option value="BJ">Benin</option>
+								<option value="BM">Bermuda</option>
+								<option value="BT">Bhutan</option>
+								<option value="BO">Bolivia</option>
+								<option value="BA">Bosnia and Herzegovina</option>
+								<option value="BW">Botswana</option>
+								<option value="BV">Bouvet Island</option>
+								<option value="BR">Brazil</option>
+								<option value="IO">British Indian Ocean Territory</option>
+								<option value="BN">Brunei</option>
+								<option value="BG">Bulgaria</option>
+								<option value="BF">Burkina Faso</option>
+								<option value="BI">Burundi</option>
+								<option value="KH">Cambodia</option>
+								<option value="CM">Cameroon</option>
+								<option value="CA">Canada</option>
+								<option value="CV">Cape Verde</option>
+								<option value="KY">Cayman Islands</option>
+								<option value="CF">Central African Republic</option>
+								<option value="TD">Chad</option>
+								<option value="CL">Chile</option>
+								<option value="CN">China</option>
+								<option value="CX">Christmas Island</option>
+								<option value="CC">Cocos (Keeling) Islands</option>
+								<option value="CO">Colombia</option>
+								<option value="KM">Comoros</option>
+								<option value="CG">Congo</option>
+								<option value="CD">Congo The Democratic Republic Of The</option>
+								<option value="CK">Cook Islands</option>
+								<option value="CR">Costa Rica</option>
+								<option value="CI">Cote D'Ivoire (Ivory Coast)</option>
+								<option value="HR">Croatia (Hrvatska)</option>
+								<option value="CU">Cuba</option>
+								<option value="CY">Cyprus</option>
+								<option value="CZ">Czech Republic</option>
+								<option value="DK">Denmark</option>
+								<option value="DJ">Djibouti</option>
+								<option value="DM">Dominica</option>
+								<option value="DO">Dominican Republic</option>
+								<option value="TL">East Timor</option>
+								<option value="EC">Ecuador</option>
+								<option value="EG">Egypt</option>
+								<option value="SV">El Salvador</option>
+								<option value="GQ">Equatorial Guinea</option>
+								<option value="ER">Eritrea</option>
+								<option value="EE">Estonia</option>
+								<option value="ET">Ethiopia</option>
+								<option value="FK">Falkland Islands</option>
+								<option value="FO">Faroe Islands</option>
+								<option value="FJ">Fiji Islands</option>
+								<option value="FI">Finland</option>
+								<option value="FR">France</option>
+								<option value="GF">French Guiana</option>
+								<option value="PF">French Polynesia</option>
+								<option value="TF">French Southern Territories</option>
+								<option value="GA">Gabon</option>
+								<option value="GM">Gambia The</option>
+								<option value="GE">Georgia</option>
+								<option value="DE">Germany</option>
+								<option value="GH">Ghana</option>
+								<option value="GI">Gibraltar</option>
+								<option value="GR">Greece</option>
+								<option value="GL">Greenland</option>
+								<option value="GD">Grenada</option>
+								<option value="GP">Guadeloupe</option>
+								<option value="GU">Guam</option>
+								<option value="GT">Guatemala</option>
+								<option value="GG">Guernsey and Alderney</option>
+								<option value="GN">Guinea</option>
+								<option value="GW">Guinea-Bissau</option>
+								<option value="GY">Guyana</option>
+								<option value="HT">Haiti</option>
+								<option value="HM">Heard and McDonald Islands</option>
+								<option value="HN">Honduras</option>
+								<option value="HK">Hong Kong S.A.R.</option>
+								<option value="HU">Hungary</option>
+								<option value="IS">Iceland</option>
+								<option value="IN">India</option>
+								<option value="ID">Indonesia</option>
+								<option value="IR">Iran</option>
+								<option value="IQ">Iraq</option>
+								<option value="IE">Ireland</option>
+								<option value="IL">Israel</option>
+								<option value="IT">Italy</option>
+								<option value="JM">Jamaica</option>
+								<option value="JP">Japan</option>
+								<option value="JE">Jersey</option>
+								<option value="JO">Jordan</option>
+								<option value="KZ">Kazakhstan</option>
+								<option value="KE">Kenya</option>
+								<option value="KI">Kiribati</option>
+								<option value="KP">Korea North</option>
+								<option value="KR">Korea South</option>
+								<option value="KW">Kuwait</option>
+								<option value="KG">Kyrgyzstan</option>
+								<option value="LA">Laos</option>
+								<option value="LV">Latvia</option>
+								<option value="LB">Lebanon</option>
+								<option value="LS">Lesotho</option>
+								<option value="LR">Liberia</option>
+								<option value="LY">Libya</option>
+								<option value="LI">Liechtenstein</option>
+								<option value="LT">Lithuania</option>
+								<option value="LU">Luxembourg</option>
+								<option value="MO">Macau S.A.R.</option>
+								<option value="MK">Macedonia</option>
+								<option value="MG">Madagascar</option>
+								<option value="MW">Malawi</option>
+								<option value="MY">Malaysia</option>
+								<option value="MV">Maldives</option>
+								<option value="ML">Mali</option>
+								<option value="MT">Malta</option>
+								<option value="IM">Man (Isle of)</option>
+								<option value="MH">Marshall Islands</option>
+								<option value="MQ">Martinique</option>
+								<option value="MR">Mauritania</option>
+								<option value="MU">Mauritius</option>
+								<option value="YT">Mayotte</option>
+								<option value="MX">Mexico</option>
+								<option value="FM">Micronesia</option>
+								<option value="MD">Moldova</option>
+								<option value="MC">Monaco</option>
+								<option value="MN">Mongolia</option>
+								<option value="ME">Montenegro</option>
+								<option value="MS">Montserrat</option>
+								<option value="MA">Morocco</option>
+								<option value="MZ">Mozambique</option>
+								<option value="MM">Myanmar</option>
+								<option value="NA">Namibia</option>
+								<option value="NR">Nauru</option>
+								<option value="NP">Nepal</option>
+								<option value="AN">Netherlands Antilles</option>
+								<option value="NL">Netherlands The</option>
+								<option value="NC">New Caledonia</option>
+								<option value="NZ">New Zealand</option>
+								<option value="NI">Nicaragua</option>
+								<option value="NE">Niger</option>
+								<option value="NG">Nigeria</option>
+								<option value="NU">Niue</option>
+								<option value="NF">Norfolk Island</option>
+								<option value="MP">Northern Mariana Islands</option>
+								<option value="NO">Norway</option>
+								<option value="OM">Oman</option>
+								<option value="PK">Pakistan</option>
+								<option value="PW">Palau</option>
+								<option value="PS">Palestinian Territory Occupied</option>
+								<option value="PA">Panama</option>
+								<option value="PG">Papua new Guinea</option>
+								<option value="PY">Paraguay</option>
+								<option value="PE">Peru</option>
+								<option value="PH">Philippines</option>
+								<option value="PN">Pitcairn Island</option>
+								<option value="PL">Poland</option>
+								<option value="PT">Portugal</option>
+								<option value="PR">Puerto Rico</option>
+								<option value="QA">Qatar</option>
+								<option value="RE">Reunion</option>
+								<option value="RO">Romania</option>
+								<option value="RU">Russia</option>
+								<option value="RW">Rwanda</option>
+								<option value="SH">Saint Helena</option>
+								<option value="KN">Saint Kitts And Nevis</option>
+								<option value="LC">Saint Lucia</option>
+								<option value="PM">Saint Pierre and Miquelon</option>
+								<option value="VC">Saint Vincent And The Grenadines</option>
+								<option value="BL">Saint-Barthelemy</option>
+								<option value="MF">Saint-Martin (French part)</option>
+								<option value="WS">Samoa</option>
+								<option value="SM">San Marino</option>
+								<option value="ST">Sao Tome and Principe</option>
+								<option value="SA">Saudi Arabia</option>
+								<option value="SN">Senegal</option>
+								<option value="RS">Serbia</option>
+								<option value="SC">Seychelles</option>
+								<option value="SL">Sierra Leone</option>
+								<option value="SG">Singapore</option>
+								<option value="SK">Slovakia</option>
+								<option value="SI">Slovenia</option>
+								<option value="SB">Solomon Islands</option>
+								<option value="SO">Somalia</option>
+								<option value="ZA">South Africa</option>
+								<option value="GS">South Georgia</option>
+								<option value="SS">South Sudan</option>
+								<option value="ES">Spain</option>
+								<option value="LK">Sri Lanka</option>
+								<option value="SD">Sudan</option>
+								<option value="SR">Suriname</option>
+								<option value="SJ">Svalbard And Jan Mayen Islands</option>
+								<option value="SZ">Swaziland</option>
+								<option value="SE">Sweden</option>
+								<option value="CH">Switzerland</option>
+								<option value="SY">Syria</option>
+								<option value="TW">Taiwan</option>
+								<option value="TJ">Tajikistan</option>
+								<option value="TZ">Tanzania</option>
+								<option value="TH">Thailand</option>
+								<option value="TG">Togo</option>
+								<option value="TK">Tokelau</option>
+								<option value="TO">Tonga</option>
+								<option value="TT">Trinidad And Tobago</option>
+								<option value="TN">Tunisia</option>
+								<option value="TR">Turkey</option>
+								<option value="TM">Turkmenistan</option>
+								<option value="TC">Turks And Caicos Islands</option>
+								<option value="TV">Tuvalu</option>
+								<option value="UG">Uganda</option>
+								<option value="UA">Ukraine</option>
+								<option value="AE">United Arab Emirates</option>
+								<option value="GB">United Kingdom</option>
+								<option value="US" selected="selected">United States</option>
+								<option value="UM">United States Minor Outlying Islands</option>
+								<option value="UY">Uruguay</option>
+								<option value="UZ">Uzbekistan</option>
+								<option value="VU">Vanuatu</option>
+								<option value="VA">Vatican City State (Holy See)</option>
+								<option value="VE">Venezuela</option>
+								<option value="VN">Vietnam</option>
+								<option value="VG">Virgin Islands (British)</option>
+								<option value="VI">Virgin Islands (US)</option>
+								<option value="WF">Wallis And Futuna Islands</option>
+								<option value="EH">Western Sahara</option>
+								<option value="YE">Yemen</option>
+								<option value="ZM">Zambia</option>
+								<option value="ZW">Zimbabwe</option>
+							</select>
+						</div>
+
+						<div class="col-md-12 form-group contact-forms">
+							<select class="form-control" id="membership_length">
+								<option value=1>Semester - $30</option>
+								<option value=2>Year - $40</option>
+							</select>
+						</div>
+
+						<div class="col-md-12 form-group contact-forms">
+								<div id="card-element">
+								<!-- A Stripe Element will be inserted here. -->
+								</div>
+
+								<!-- Used to display form errors. -->
+								<div id="card-errors" role="alert"></div>
+						</div>						
+
+						<div class="col-md-12 booking-button">
+							<button id="submit-btn" class="btn btn-block sent-butnn">Become a member</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-lg-5 contact-right pl-lg-5">
+				
+					<div class="image-tour position-relative">
+						<img src="https://lylelondraville.github.io/public_html/images/LOGO-circle.png" class="img-fluid" />
+					</div>
+					
+					<h4 class="center-all-txt">Important!</h4>
+					<p class="mt-3 center-all-txt">You MUST fill out an insurance waiver before you are a member. 
+						This page only pays for your membership, it does not make you a member. You can fill out an
+						insurance waiver at any meeting and give it to an officer. You can read more <a href="https://monti-test-site-test.us/about">here</a></p>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<div class="copyright py-3 text-center">
+	<p>© 2019 Mountaineers. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="=_blank"> W3layouts </a></p>
+</div>
+
+	
+</body>
+</html>
+
+
+<script src="https://lylelondraville.github.io/DB/public_js/membership-submit.js"></script>
+
