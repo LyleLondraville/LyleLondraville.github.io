@@ -63,15 +63,27 @@ form.addEventListener('submit', function(event) {
 function stripeTokenHandler(token) {
   //var url = "https://osumountaineers.com/member?"
   //var url = "http://localhost:3000/member?"
-  var url = "https://www.monti-test-site-test.us/member"
+  var url = "https://www.monti-test-site-test.us/payment"
 
 
   url+= "firstName="+document.getElementById("first-name").value
   url+= "&lastName="+document.getElementById("last-name").value
   url+= "&dotNumber="+document.getElementById("dot-number").value
   url+= "&iso2="+$("#select_country").val()
-  url+= "&nonOSUemail="+document.getElementById("email").value
-  url+= "&membershipLength="+$("#membership_length").val()
+  if (("#payment-select").val() == 1){
+    url+= "&paymentType=sMembership-semester"
+    url+= "paymentAmount=30"
+    url+= "paymentDescription=_"
+  }else if (("#payment-select").val() == 2){
+    url+= "&paymentType=Membership-year"
+    url+= "paymentAmount=40"
+    url+= "paymentDescription=_"
+  }else{
+    url+= "&paymentType=other"
+    url+= "paymentAmount="+document.getElementById("amount")
+    url+= "paymentDescription="+document.getElementById("description")
+  }
+    
 
   var myHeaders = new Headers({
     'Stripe-Token': token,
@@ -85,7 +97,7 @@ function stripeTokenHandler(token) {
           alert(result.error)
         })
       }else{
-        window.location.replace("https://www.monti-test-site-test.us/membership-succsess.html")
+        window.location.replace("https://www.monti-test-site-test.us/payment-succsess.html")
       }
   })
 }

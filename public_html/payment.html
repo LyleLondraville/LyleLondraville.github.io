@@ -14,15 +14,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 	<!-- JS files -->
 	<script src="https://js.stripe.com/v3/"></script>
-	<script src="https://lylelondraville.github.io/DB/public_js/check-membership-form.js"></script>
 	<!-- //JS files -->
 	
 
 	<!-- css files -->
 
 
-    <link href="https://lylelondraville.github.io/public_html/css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="https://lylelondraville.github.io/public_html/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="http://lylelondraville.github.io/public_html/css/bootstrap-test.css" rel='stylesheet' type='text/css' />
+    <link href="https://lylelondraville.github.io/public_html/css/style-test.css" rel='stylesheet' type='text/css' />
     <script src="https://kit.fontawesome.com/cbd33952c6.js"></script>
     <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
 	<!-- //css files -->
@@ -67,14 +66,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 						<div name="lastname" class="col-sm-6 form-group contact-forms">
 						  <input name="lastname" id="last-name" type="text" class="form-control" placeholder="Last Name">
-						</div>
-
-						<div class="col-sm-6 form-group contact-forms">
-						  <input name="dotnumber" id="dot-number" type="number" class="form-control" placeholder="OSU dot number"> 
-						</div>
-
-						<div class="col-sm-6 form-group contact-forms">
-							<input name="email" id="email" type="text" class="form-control" placeholder="non-osu email"> 
 						</div>
 
 						<div class="col-md-12 form-group contact-forms">
@@ -329,10 +320,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</select>
 						</div>
 
-						<div class="col-md-12 form-group contact-forms">
-							<select class="form-control" id="membership_length">
-								<option value=1>Semester - $30</option>
-								<option value=2>Year - $40</option>
+						<div class="col-sm-6 form-group contact-forms">
+								<input name="dotnumber" id="dot-number" type="number" class="form-control" placeholder="OSU dot number"> 
+						</div>
+
+						<div class="col-sm-6 form-group contact-forms">
+							<select class="form-control" id="payment-select">
+								<option value=2>Year Membership- $40</option>
+								<option value=1>Semester Membership- $30</option>
+								<option value=3>Trip/Other</option>
+								
 							</select>
 						</div>
 
@@ -377,5 +374,164 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </html>
 
 
-<script src="https://lylelondraville.github.io/DB/public_js/membership-submit.js"></script>
+<script>
+// Create a Stripe client.
+var stripe = Stripe("pk_live_sKLHKTmKO4Et6z2A286T86TF00YWF7zs7l");
+
+// Create an instance of Elements.
+var elements = stripe.elements();
+
+// Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+var style = {
+  base: {
+    fontFamily: 'sans-serif, sans-serif, sans-serif',
+    fontSize: '16px'
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+};		
+
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
+
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+
+
+// Handle real-time validation errors from the card Element.
+card.addEventListener('change', function(event) {
+  var displayError = document.getElementById('card-errors');
+  if (event.error) {
+  displayError.textContent = event.error.message;
+  } else {
+  displayError.textContent = '';
+  }
+});
+
+// Handle form submission.
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  var description
+
+  if ($("#payment-select").val() == 1){
+    description = "Membership-semester"
+  }else if ($("#payment-select").val() == 2){
+    description = "Membership-year"
+  }else{
+    description = document.getElementById("description").value
+  }
+
+  var tokenData = {
+	"name": document.getElementById("first-name").value + " " + document.getElementById("last-name").value,
+	"description":description,
+    "address_country": $("#select_country").val(),
+    "currency": "usd"
+  }
+
+  stripe.createToken(card, tokenData).then(function(result) {
+  if (result.error) {
+    // Inform the user if there was an error.
+    var errorElement = document.getElementById('card-errors');
+    errorElement.textContent = result.error.message;
+  } else {
+    // Send the token to your server.
+    stripeTokenHandler(result.token.id);
+
+  }
+  })
+})
+
+// Submit the form with the token ID.
+function stripeTokenHandler(token) {
+  //var url = "https://osumountaineers.com/member?"
+  //var url = "http://localhost:3000/member?"
+  var url = "https://www.monti-test-site-test.us/payment"
+
+
+  url+= "firstName="+document.getElementById("first-name").value
+  url+= "&lastName="+document.getElementById("last-name").value
+  url+= "&dotNumber="+document.getElementById("dot-number").value
+  url+= "&iso2="+$("#select_country").val()
+  if ($("#payment-select").val() == 1){
+    url+= "&paymentType=sMembership-semester"
+    url+= "&paymentAmount=30"
+    url+= "&paymentDescription=_"
+  }else if ($("#payment-select").val() == 2){
+    url+= "&paymentType=Membership-year"
+    url+= "&paymentAmount=40"
+    url+= "&paymentDescription=_"
+  }else{
+    url+= "&paymentType=other"
+    url+= "&paymentAmount="+document.getElementById("amount").value
+    url+= "&paymentDescription="+document.getElementById("description").value
+  }
+    
+
+  var myHeaders = new Headers({
+    'Stripe-Token': token,
+    "Access-Control-Expose-Headers": "Stripe-Token"
+  });
+
+  fetch(url, {method:"POST", mode:"cors", headers: myHeaders})
+    .then(function(result){
+      if(result.status != 200){
+        result.json().then(function(result){
+          alert(result.error)
+        })
+      }else{
+        window.location.replace("https://www.monti-test-site-test.us/payment-succsess.html")
+      }
+  })
+}
+</script>
+
+<script>
+  var paymentOption = document.getElementById("payment-select")
+  paymentOption.addEventListener("input", function(element){
+
+    if ($("#payment-select").val() == 3){
+        var description_div = document.createElement("div")
+        var amount_div = document.createElement("div")
+
+        description_div.className = "col-sm-6 form-group contact-forms"
+        amount_div.className = "col-sm-6 form-group contact-forms"
+
+        description_div.id = "description-div"
+        amount_div.id = "amount-div"
+        
+        var description = document.createElement("input")
+        var amount = document.createElement("input")
+
+        description.id = "description"
+        amount.id = "amount"
+
+        description.className = "form-control"
+        amount.className = "form-control"
+
+        description.setAttribute("placeholder", "description")
+        amount.setAttribute("placeholder", "amount")
+        amount.setAttribute("type", "number")
+
+        description_div.append(description)
+        amount_div.append(amount)
+
+		var masterDoc = document.getElementById("payment-form")
+		masterDoc.insertBefore(amount_div, masterDoc.childNodes[10])
+        masterDoc.insertBefore(description_div, masterDoc.childNodes[10])
+        
+
+    }else{
+        document.getElementById("description-div").remove()
+        document.getElementById("amount-div").remove()
+    }
+
+})
+
+</script>
 
